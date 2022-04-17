@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      M&eacute;todos Num&eacute;ricos | Luis Roberto Pinto Guti&eacute;rrez
+    </title>
+    <!-- Stylesheet-->
+    <link rel="stylesheet" href="style.css" />
+    <!-- Google Font Montserrat Link -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <div class="tabs">
+      <div class="tabsHead">
+        <span class="tabsToggle isActive">Bisecci&oacute;n</span>
+        <span class="tabsToggle">Programa 2</span>
+        <span class="tabsToggle">Programa 3</span>
+        <span class="tabsToggle">Programa 4</span>
+      </div>
+      <div class="tabsBody">
+        <div class="tabsContent isActive">
+          <h2 class="tabsTitle">M&eacute;todo de Bisecci&oacute;n</h2>
+          <div class="calculator">
+            <div class="displayCalculator">
+              <label
+                >Valor de F(x)<input
+                  class="screen"
+                  id="Fx"
+                  spellcheck="false"
+                  type="text"
+                  style="text-transform: lowercase"
+                  onkeyup="javascript:this.value=this.value.toLowerCase();"
+              /></label>
+            </div>
+            <div class="optionsCalculator">
+              <label>Valor Inferior (Xi) <input type="number" id="Xi" /></label>
+            </div>
+            <div class="optionsCalculator">
+              <label>Valor Superior (Xu) <input type="number" id="Xu" /></label>
+            </div>
+            <div class="optionsCalculator">
+              <label
+                >Porcentaje de error (%)
+                <input type="number" id="ToleranciaError"
+              /></label>
+            </div>
+            <input type="button" onclick=" biseccion()" value="Calcular" />
+            <input type="button" onclick="clean()" value="Limpiar" />
+          </div>
+          <div class="alertResult" id="Result"></div>
+        </div>
+        <div class="tabsContent">
+          <h2 class="tabsTitle">Title 2</h2>
+          <p class="tabsText">
+            2Lorem ipsum dolor sit amet consectetur, adipisicing elit. Tempora
+            aliquam sint veniam, officiis ipsam earum quae. Accusamus ad id
+            sint, cum recusandae quam doloribus qui dolorem, repudiandae
+            voluptatem doloremque! Veritatis iste ipsam tempora totam at
+            necessitatibus est soluta porro, quis recusandae vero dolores sint
+            fugit consequatur harum voluptatum maiores in.
+          </p>
+        </div>
+        <div class="tabsContent">
+          <h2 class="tabsTitle">Title 3</h2>
+          <p class="tabsText">
+            3Lorem ipsum dolor sit amet consectetur, adipisicing elit. Tempora
+            aliquam sint veniam, officiis ipsam earum quae. Accusamus ad id
+            sint, cum recusandae quam doloribus qui dolorem, repudiandae
+            voluptatem doloremque! Veritatis iste ipsam tempora totam at
+            necessitatibus est soluta porro, quis recusandae vero dolores sint
+            fugit consequatur harum voluptatum maiores in.
+          </p>
+        </div>
+        <div class="tabsContent">
+          <h2 class="tabsTitle">Title 4</h2>
+          <p class="tabsText">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione,
+            sapiente?
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <script src="src/navigation.js"></script>
+    <script src="src/main.js"></script>
+  </body>
+</html>
