@@ -49,12 +49,15 @@
             </div>
             <div class="optionsCalculator">
               <label
-                >Porcentaje de error (%)
-                <input type="number" id="ToleranciaError"
+                >Tolerancia de Error <input type="number" id="ToleranciaError"
               /></label>
             </div>
-            <input type="button" onclick=" biseccion()" value="Calcular" />
-            <input type="button" onclick="clean()" value="Limpiar" />
+            <input
+              type="button"
+              onclick=" biseccion(); checkInputs()"
+              value="Calcular"
+            />
+            <input type="button" onclick="clean()" value="Borrar" />
           </div>
           <div class="alertResult" id="Result"></div>
         </div>

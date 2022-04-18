@@ -11,6 +11,10 @@ p {
   line-height: 1.5rem;
 }
 
+b {
+  color: #404040;
+}
+
 h2 {
   padding: 1rem;
   margin-top: 1rem;
