@@ -30,6 +30,7 @@ function biseccion() {
 
   let porcentualError = 0;
   let iteracion = 0;
+  fx = fx.replace("^", "**");
 
   do {
     iteracion++;

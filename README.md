@@ -25,11 +25,12 @@ let result = document.getElementById("Result"); //ITERACION IMPRESA
 result.innerHTML = "";
 ```
 
-En el siguiente bloque se inicializan dos variables antes de empezar el bucle (de las iteraciones):
+En el siguiente bloque se inicializan dos variables antes de empezar el bucle, y se cambia la forma de escribir la exponenciaci&oacute;n, en vez de "**", se usa "^".
 
 ```javascript
 let porcentualError = 0;
 let iteracion = 0;
+fx = fx.replace("^", "**");
 ```
 
 En el siguiente bloque se inicializa el ciclo _do...while_, ejecutando en bucle cierto c&oacute;digo hasta que la condici&oacute;n establecida sea falsa:
