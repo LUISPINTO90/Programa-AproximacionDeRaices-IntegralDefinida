@@ -34,8 +34,12 @@ function biseccion() {
 
   do {
     iteracion++;
-    porcentualError = Math.abs(((xu - xi) / 2) * 100);
     let xr = (xi + xu) / 2;
+    let xAnterior = xr;
+
+    if (iteracion > 1) {
+      porcentualError = Math.abs(((xi - xAnterior) / xr) * 100);
+    }
 
     //EVALUAR F(xi) F(xr) F(xu);
     let fXI = eval(fx.replace(/x/g, xi));
@@ -51,7 +55,12 @@ function biseccion() {
       nuevoIntervalo = `[${xr}, ${xu}]`;
     }
 
-    result.innerHTML += `<h2>ITERACIÓN ${iteracion}</h2><p><b>XR = </b>${xr}<br><b>Error = </b>${porcentualError}%<br><br><b>Fxi(${xi}) = </b>${fXI}<br><b>Fxr(${xr}) = </b>${fXR}<br><b>Fxu(${xu}) = </b>${fXU}<br><br><b>Siguiente Intervalo = </b>${nuevoIntervalo}</p>`;
+    // IMPRIMIR ERROR SI LAS ITERACIONES SON MAYORES A 1
+    if (iteracion == 1) {
+      result.innerHTML += `<h2>ITERACIÓN ${iteracion}</h2><p><b>XR = </b>${xr}<br><br><b>Fxi(${xi}) = </b>${fXI}<br><b>Fxr(${xr}) = </b>${fXR}<br><b>Fxu(${xu}) = </b>${fXU}<br><br><b>Siguiente Intervalo = </b>${nuevoIntervalo}</p><hr>`;
+    } else {
+      result.innerHTML += `<h2>ITERACIÓN ${iteracion}</h2><p><b>XR = </b>${xr}<br><b>Error = </b>${porcentualError}%<br><br><b>Fxi(${xi}) = </b>${fXI}<br><b>Fxr(${xr}) = </b>${fXR}<br><b>Fxu(${xu}) = </b>${fXU}<br><br><b>Siguiente Intervalo = </b>${nuevoIntervalo}</p><hr>`;
+    }
 
     //ASIGNAR Xu y Xi
     if (Math.sign(fXI) === -1 && Math.sign(fXR) === 1) {
@@ -60,5 +69,8 @@ function biseccion() {
     if (Math.sign(fXR) === -1 && Math.sign(fXU) === 1) {
       xi = xr;
     }
-  } while (porcentualError >= toleranciaError);
+  } while (
+    porcentualError >= toleranciaError ||
+    (porcentualError == 0.0 && iteracion == 1)
+  );
 }

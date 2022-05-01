@@ -42,10 +42,14 @@ do {
 ```
 
 ```javascript
-do {
+ do {
     iteracion++;
-    porcentualError = Math.abs(((xu - xi) / 2) * 100);
     let xr = (xi + xu) / 2;
+    let xAnterior = xr;
+
+    if (iteracion >= 2) {
+      porcentualError = Math.abs(((xu - xAnterior) / xr) * 100);
+    }
 
     //EVALUAR F(xi) F(xr) F(xu);
     let fXI = eval(fx.replace(/x/g, xi));
@@ -61,7 +65,12 @@ do {
       nuevoIntervalo = `[${xr}, ${xu}]`;
     }
 
-    result.innerHTML += `<h2>ITERACIÓN ${iteracion}</h2><p><b>XR = </b>${xr}<br><b>Error = </b>${porcentualError}%<br><br><b>Fxi(${xi}) = </b>${fXI}<br><b>Fxr(${xr}) = </b>${fXR}<br><b>Fxu(${xu}) = </b>${fXU}<br><br><b>Siguiente Intervalo = </b>${nuevoIntervalo}</p>`;
+    // IMPRIMIR ERROR SI LAS ITERACIONES SON MAYORES A 1
+    if (iteracion == 1) {
+      result.innerHTML += `<h2>ITERACIÓN ${iteracion}</h2><p><b>XR = </b>${xr}<br><br><b>Fxi(${xi}) = </b>${fXI}<br><b>Fxr(${xr}) = </b>${fXR}<br><b>Fxu(${xu}) = </b>${fXU}<br><br><b>Siguiente Intervalo = </b>${nuevoIntervalo}</p><hr>`;
+    } else {
+      result.innerHTML += `<h2>ITERACIÓN ${iteracion}</h2><p><b>XR = </b>${xr}<br><b>Error = </b>${porcentualError}%<br><br><b>Fxi(${xi}) = </b>${fXI}<br><b>Fxr(${xr}) = </b>${fXR}<br><b>Fxu(${xu}) = </b>${fXU}<br><br><b>Siguiente Intervalo = </b>${nuevoIntervalo}</p><hr>`;
+    }
 
     //ASIGNAR Xu y Xi
     if (Math.sign(fXI) === -1 && Math.sign(fXR) === 1) {
@@ -70,15 +79,26 @@ do {
     if (Math.sign(fXR) === -1 && Math.sign(fXU) === 1) {
       xi = xr;
     }
-  } while (porcentualError >= toleranciaError);
+  } while (
+    porcentualError >= toleranciaError ||
+    (porcentualError == 0.0 && iteracion == 1)
+  );
 ```
 
-En el primer bloque _do_, se asigna el incremento _iteracion++_ (esta imprime en Result el n&uacute;mero de la iteraci&oacute;n «ITERACI&Oacute;N 8..9..10..»); Se asigna el valor del error porcentual; Y se declara el valor de Xr:
+En el primer bloque _do_, se asigna el incremento _iteracion++_ (esta imprime en Result el n&uacute;mero de la iteraci&oacute;n «ITERACI&Oacute;N 8..9..10..»); Se declara el valor de Xr y el valor de Xr anterior (xAnterior):
 
 ```javascript
     iteracion++;
-    porcentualError = Math.abs(((xu - xi) / 2) * 100);
     let xr = (xi + xu) / 2;
+    let xAnterior = xr;
+```
+
+Se condiciona, si las iteraciones son mayor a 1, se calcula el error porcentual:
+
+```javascript
+if (iteracion > 1) {
+      porcentualError = Math.abs(((xu - xAnterior) / xr) * 100);
+    }
 ```
 
 Se eval&uacute;a Xi, Xr, Xu, con la f&oacute;rmula establecida en F(x), esto para conocer los valores de F(xi), F(xr), F(xu) y as&iacute; conocer el siguiente intervalo:
@@ -106,7 +126,12 @@ Se eval&uacute;a Xi, Xr, Xu, con la f&oacute;rmula establecida en F(x), esto par
 Se asigna en adici&oacute;n mediante JavaScript los valores calculados de _iteracion, xr, porcentualError, fXI, fXR, fXU, nuevoIntervalo_ en formato HTML:
 
 ```javascript
-result.innerHTML += `<h2>ITERACIÓN ${iteracion}</h2><p><b>XR = </b>${xr}<br><b>Error = </b>${porcentualError}%<br><br><b>Fxi(${xi}) = </b>${fXI}<br><b>Fxr(${xr}) = </b>${fXR}<br><b>Fxu(${xu}) = </b>${fXU}<br><br><b>Siguiente Intervalo = </b>${nuevoIntervalo}</p>`;
+// IMPRIMIR ERROR SI LAS ITERACIONES SON MAYORES A 1
+    if (iteracion == 1) {
+      result.innerHTML += `<h2>ITERACIÓN ${iteracion}</h2><p><b>XR = </b>${xr}<br><br><b>Fxi(${xi}) = </b>${fXI}<br><b>Fxr(${xr}) = </b>${fXR}<br><b>Fxu(${xu}) = </b>${fXU}<br><br><b>Siguiente Intervalo = </b>${nuevoIntervalo}</p><hr>`;
+    } else {
+      result.innerHTML += `<h2>ITERACIÓN ${iteracion}</h2><p><b>XR = </b>${xr}<br><b>Error = </b>${porcentualError}%<br><br><b>Fxi(${xi}) = </b>${fXI}<br><b>Fxr(${xr}) = </b>${fXR}<br><b>Fxu(${xu}) = </b>${fXU}<br><br><b>Siguiente Intervalo = </b>${nuevoIntervalo}</p><hr>`;
+    }
 ```
 As&iacute; es como luce:
 <div align="center">
@@ -135,7 +160,10 @@ Esta condici&oacute;n quiere decir:
 Como condici&oacute;n del bucle en _while_, el c&oacute;digo se va a ciclar mientras el error porcentual sea mayor o igual que la tolerancia de error porcentual establecida (cuando esto sea _false_ entonces se terminan las iteraciones).:
 
 ```javascript
-while (porcentualError >= toleranciaError);
+while (
+    porcentualError >= toleranciaError ||
+    (porcentualError == 0.0 && iteracion == 1)
+  );
 ```
 
 </p>
