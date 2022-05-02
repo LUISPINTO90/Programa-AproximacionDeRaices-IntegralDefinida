@@ -167,3 +167,76 @@ while (
 ```
 
 </p>
+
+<br><br><br>
+
+<div align="center">
+<!-- BISECCIÓN -->
+  <h2>➡️ M&eacute;todo Regula Falsi</h2>
+  <br />
+  <!-- IMAGEN-BISECCIÓN -->
+  <img width="45%" height="80%" src="img/005.png" /><br /><br />
+</div>
+
+<h3>↪️ Funcionamientos de regulaFalsi()</h3>
+
+  <p>Dentro de main.js (src/main.js), la funci&oacute;n regulaFalsi() &uacute;nicamente realiza el c&aacute;lculo del m&eacute;todo de regula falsi. El c&aacute;lculo es similar a la bisecci&oacute;n. Solo que cambia la f&oacute;rmula para calcular Xr, esto afecta en el resultado de Xr por cada iteraci&oacute;n.<br>Este es el c&oacute;digo:
+
+  ```javascript
+  function regulaFalsi() {
+  let fx = document.getElementById("Fx_RFM").value; // FUNCTION
+  let xi = parseFloat(document.getElementById("Xi_RFM").value); //X INFERIOR
+  let xu = parseFloat(document.getElementById("Xu_RFM").value); //X SUPERIOR
+  let toleranciaError = parseFloat(
+    document.getElementById("ToleranciaError_RFM").value
+  ); //TOLERANCIA DE ERROR PER ITERACION
+  let result = document.getElementById("Result_RFM"); //ITERACION IMPRESA
+  result.innerHTML = "";
+
+  let porcentualError = 0;
+  let iteracion = 0;
+  fx = fx.replace("^", "**");
+  fx = fx.replace("e", Math.exp(1));
+
+  do {
+    iteracion++;
+    let fXI = eval(fx.replace(/x/g, xi));
+    let fXU = eval(fx.replace(/x/g, xu));
+    let xr = xu - (fXU * (xi - xu)) / (fXI - fXU);
+    let fXR = eval(fx.replace(/x/g, xr));
+    let xAnterior = xr;
+
+    if (iteracion > 1) {
+      porcentualError = Math.abs(((xi - xAnterior) / xr) * 100);
+    }
+
+    //EVALUAR NUEVO INTERVALO PARA IMPRIMIRLO
+    let nuevoIntervalo = 0;
+    if (Math.sign(fXI) === -1 && Math.sign(fXR) === 1) {
+      nuevoIntervalo = `[${xi}, ${xr}]`;
+    }
+    if (Math.sign(fXR) === -1 && Math.sign(fXU) === 1) {
+      nuevoIntervalo = `[${xr}, ${xu}]`;
+    }
+
+    // IMPRIMIR ERROR SI LAS ITERACIONES SON MAYORES A 1
+    if (iteracion == 1) {
+      result.innerHTML += `<h2>ITERACIÓN ${iteracion}</h2><p><b>XR = </b>${xr}<br><br><b>Fxi(${xi}) = </b>${fXI}<br><b>Fxr(${xr}) = </b>${fXR}<br><b>Fxu(${xu}) = </b>${fXU}<br><br><b>Siguiente Intervalo = </b>${nuevoIntervalo}</p><hr>`;
+    } else {
+      result.innerHTML += `<h2>ITERACIÓN ${iteracion}</h2><p><b>XR = </b>${xr}<br><b>Error = </b>${porcentualError}%<br><br><b>Fxi(${xi}) = </b>${fXI}<br><b>Fxr(${xr}) = </b>${fXR}<br><b>Fxu(${xu}) = </b>${fXU}<br><br><b>Siguiente Intervalo = </b>${nuevoIntervalo}</p><hr>`;
+    }
+
+    //ASIGNAR Xu y Xi
+    if (Math.sign(fXI) === -1 && Math.sign(fXR) === 1) {
+      xu = xr;
+    }
+    if (Math.sign(fXR) === -1 && Math.sign(fXU) === 1) {
+      xi = xr;
+    }
+  } while (
+    porcentualError >= toleranciaError ||
+    (porcentualError == 0.0 && iteracion == 1)
+  );
+}
+  ```
+  </p>

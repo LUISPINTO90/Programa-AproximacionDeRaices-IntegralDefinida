@@ -32,7 +32,8 @@ label {
 
 input {
   padding: 1rem;
-  font-family: "Cascadia Code", sans-serif;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 600;
   font-size: 1.2em;
   border: none;
   border-radius: 10px;
