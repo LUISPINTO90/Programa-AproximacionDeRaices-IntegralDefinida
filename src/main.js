@@ -66,9 +66,9 @@ function biseccion() {
     }
 
     //EVALUAR F(xi) F(xr) F(xu);
-    let fXI = eval(fx.replace(/x/g, xi));
-    let fXR = eval(fx.replace(/x/g, xr));
-    let fXU = eval(fx.replace(/x/g, xu));
+    let fXI = eval(fx.replace(/x/g, "(xi)"));
+    let fXR = eval(fx.replace(/x/g, "(xr)"));
+    let fXU = eval(fx.replace(/x/g, "(xu)"));
 
     //EVALUAR NUEVO INTERVALO PARA IMPRIMIRLO
     let nuevoIntervalo = 0;
@@ -116,10 +116,10 @@ function regulaFalsi() {
 
   do {
     iteracion++;
-    let fXI = eval(fx.replace(/x/g, xi));
-    let fXU = eval(fx.replace(/x/g, xu));
+    let fXI = eval(fx.replace(/x/g, "(xi)"));
+    let fXU = eval(fx.replace(/x/g, "(xu)"));
     let xr = xu - (fXU * (xi - xu)) / (fXI - fXU);
-    let fXR = eval(fx.replace(/x/g, xr));
+    let fXR = eval(fx.replace(/x/g, "(xr)"));
     let xAnterior = xr;
 
     if (iteracion > 1) {
