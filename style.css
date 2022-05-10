@@ -12,6 +12,7 @@ p {
 }
 
 b {
+  font-weight: 700;
   color: #404040;
 }
 
@@ -22,6 +23,7 @@ hr {
 }
 
 h2 {
+  font-weight: 800;
   padding: 1rem;
   margin-top: 1rem;
 }
